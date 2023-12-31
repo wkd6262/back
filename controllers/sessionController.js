@@ -26,7 +26,7 @@ const loginUser = async (req, res, mydb) => {
     } else if (result.userPw && result.userPw === sha(userPw)) {
       req.session.user = { userId, userPw };
       console.log("새로운 로그인");
-      res.json({ user: req.session.user, redirect: "/main"  });
+      res.json({ user: req.session.user, redirect: "/main" });
     } else {
       return res.json({ err: "비밀번호가 틀렸습니다" });
     }

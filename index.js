@@ -7,9 +7,11 @@ const sha = require("sha256");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
+const axios = require("axios");
 
 // controllers
 const sessionController = require("./controllers/sessionController");
+const aladdinController = require("./controllers/aladdinController");
 // const postControllers = require("./controllers/postController");
 
 //세션 설정 (주로 앞쪽에 작성)
@@ -26,6 +28,9 @@ app.use(
 
 app.use(cors());
 app.use(express.json());
+
+// Preflight 요청을 허용
+app.options("*", cors());
 
 const PORT = process.env.PORT || 8080;
 const URL = process.env.MONGODB_URL;
@@ -110,6 +115,18 @@ app.get("/logout", sessionController.logoutUser);
 
 // 게시글 수정
 // app.post("/posts/update", postControllers.getPostUpdate);
+
+//알라딘 검색
+app.get("/search", aladdinController.searchValue);
+
+//시작 부분 - 베스트셀러
+app.get("/library/best", aladdinController.startbestValue);
+
+//끝 부분 - 베스트셀러
+app.get("/library/new", aladdinController.endbestValue);
+
+//알라딘 신간 전체
+app.get("/library/news", aladdinController.newValue);
 
 app.listen(PORT, () => {
   console.log("8080번 포트에서 실행 중");
