@@ -12,7 +12,7 @@ const axios = require("axios");
 // controllers
 const sessionController = require("./controllers/sessionController");
 const aladdinController = require("./controllers/aladdinController");
-// const postControllers = require("./controllers/postController");
+ const postControllers = require("./controllers/postController");
 
 //세션 설정 (주로 앞쪽에 작성)
 app.use(
@@ -101,20 +101,20 @@ app.get("/logout", sessionController.logoutUser);
 
 // 게시판
 // posts
-// app.get("/posts", postControllers.getPosts);
-// app.get("/posts/total", postControllers.getPostTotal);
+app.get("/posts", postControllers.getPosts);
+app.get("/posts/total", postControllers.getPostTotal);
 
 // 게시글 작성
-// app.post("/posts/write", postControllers.getPostWrite);
+ app.post("/posts/write", postControllers.getPostWrite);
 
 // 게시글 읽기
-// app.get("/posts/read/:id", postControllers.getPostRead);
+ app.get("/posts/read/:id", postControllers.getPostRead);
 
 // 게시글 삭제
-// app.post("/posts/delete/:id", postControllers.getPostDelete);
+app.post("/posts/delete/:id", postControllers.getPostDelete);
 
 // 게시글 수정
-// app.post("/posts/update", postControllers.getPostUpdate);
+app.post("/posts/update", postControllers.getPostUpdate);
 
 //알라딘 검색
 app.get("/search", aladdinController.searchValue);
